@@ -8,13 +8,6 @@ $dist_vec = array();
 
 class TSPd
 {
-    function Test()
-    {
-        global $code;
-        $code=12;
-        echo $code;
-    }
-
     function build_subsets(&$subdist,&$dist)
     {
         global $num_subset; //2^4
@@ -89,8 +82,21 @@ class TSPd
 
     function main($Array)
     {
+        //Crer matriz con solo los valores de las distancias
+        $Arreglo=array();
+        for($i=0; $i<count($Array)-1; $i++)
+        {
+            for($j=0; $j<count($Array)-1; $j++)
+            {
+                $I=$i+1;
+                $J=$j+1;
+                $Arreglo[$i][$j]=$Array[$I][$J];
+            }
+        }
+
+        //TSP
         global $num_cities;
-        $num_cities=count($Array);
+        $num_cities=count($Arreglo);
 
         global $num_subset;
         $num_subset= pow(2,$num_cities);
@@ -113,11 +119,11 @@ class TSPd
         }
 
         //Copiar datos de array de entrada csv a matriz
-        for($i=0; $i<count($Array); $i++)
+        for($i=0; $i<count($Arreglo); $i++)
         {
-            for($j=0; $j<count($Array); $j++)
+            for($j=0; $j<count($Arreglo); $j++)
             {
-                $dist[$i][$j]=$Array[$i][$j];
+                $dist[$i][$j]=$Arreglo[$i][$j];
             }
         }
 
@@ -131,7 +137,8 @@ class TSPd
         for($i=0; $i<count($cycle); $i++)
         {   
             $valor=$cycle[$i];
-            echo $valor;
+            //echo $valor;  //Mostrar solo posicion de ubicacion
+            echo $Array[$valor+1][0]; //Mostrar nombres de ubicaciones
             if($i!=count($cycle)-1) echo'->';
  
         }
@@ -146,14 +153,6 @@ class TSPd
         }
 
         echo $cycle_dist;
-
-        
-
-
-
-        
-        
-
     }
 }
 ?>

@@ -69,7 +69,7 @@
                                 include 'TSP.php';
                                 $InstanciaI=new ClaseCSVaArray();
                                 $Instancia2=new TSPd();
-                                $InstanciaI->ImprimirArray($Array);
+                                //$InstanciaI->ImprimirArray($Array);
                                 $Instancia2->Main($Array);
 
 
